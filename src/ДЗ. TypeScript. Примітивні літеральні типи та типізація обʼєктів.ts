@@ -88,11 +88,19 @@ class Group {
     return this._students;
   }
 
-  constructor(directionName: string, levelName: string, status: boolean, area: string) {
+  get status(): boolean {
+    return this._status;
+  }
+
+  set status(value: boolean) {
+    this._status = value;
+  }
+
+  constructor(directionName: string, levelName: string, area: string, status: boolean) {
     this._directionName = directionName;
     this._levelName = levelName;
-    this._status = status;
     this._area = area;
+    this._status = status;
   }
 
   showPerformance(): typeof this._students {
@@ -108,10 +116,6 @@ class Group {
 
   removeStudent(student: Student): void {
     this._students = this._students.filter(s => s !== student);
-  }
-
-  setStatus(status: boolean): void {
-    this._status = status;
   }
 }
 
@@ -136,18 +140,18 @@ class Student {
     return new Date().getFullYear() - this._birthYear;
   }
 
+  set grade(gradeInfo: { workName: string; mark: number }) {
+    this._grades[gradeInfo.workName] = gradeInfo.mark;
+  }
+
+  set visit(visitInfo: { lesson: string; present: boolean }) {
+    this._visits[visitInfo.lesson] = visitInfo.present;
+  }
+
   constructor(firstName: string, lastName: string, birthYear: number) {
     this._firstName = firstName;
     this._lastName = lastName;
     this._birthYear = birthYear;
-  }
-
-  setGrade(workName: string, mark: number): void {
-    this._grades[workName] = mark;
-  }
-
-  setVisit(lesson: string, present: boolean): void {
-    this._visits[lesson] = present;
   }
 
   getPerformanceRating(): number {
