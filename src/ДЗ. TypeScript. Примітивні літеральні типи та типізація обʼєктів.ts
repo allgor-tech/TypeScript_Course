@@ -2,7 +2,17 @@ class School {
   // implement 'add area', 'remove area', 'add lecturer', and 'remove lecturer' methods
 
   _areas: string[] = [];
-  _lecturers: (string | number)[] = []; // Name, surname, position, company, experience, courses, contacts
+  _lecturers: {
+    name: string;
+    surname: string;
+    position: string;
+    company: string;
+    experience: number;
+    courses: string[];
+    contacts: string[];
+  }[] = [];
+
+  _lecturers1: object[] = [];
 
   get areas(): typeof this._areas {
     return this._areas;
@@ -20,11 +30,11 @@ class School {
     this._areas = this._areas.filter(a => a !== area);
   }
 
-  addLecturer(lecturer: string | number): void {
+  addLecturer(lecturer: (typeof this._lecturers)[0]): void {
     this._lecturers.push(lecturer);
   }
 
-  removeLecturer(lecturer: string | number): void {
+  removeLecturer(lecturer: (typeof this._lecturers)[0]): void {
     this._lecturers = this._lecturers.filter(l => l !== lecturer);
   }
 }
@@ -36,6 +46,10 @@ class Area {
 
   get levels(): typeof this._levels {
     return this._levels;
+  }
+
+  get name(): typeof this._name {
+    return this._name;
   }
 
   constructor(name: string) {
@@ -61,6 +75,14 @@ class Level {
     return this._groups;
   }
 
+  get name(): typeof this._name {
+    return this._name;
+  }
+
+  get description(): typeof this._description {
+    return this._description;
+  }
+
   constructor(name: string, description: string) {
     this._name = name;
     this._description = description;
@@ -84,12 +106,24 @@ class Group {
   _levelName: string;
   _students: Student[] = []; // Modify the array so that it has a valid toSorted method*
 
-  get students(): typeof this._students {
-    return this._students;
+  get area(): typeof this._area {
+    return this._area;
   }
 
-  get status(): boolean {
+  get status(): typeof this._status {
     return this._status;
+  }
+
+  get directionName(): typeof this._directionName {
+    return this._directionName;
+  }
+
+  get levelName(): typeof this._levelName {
+    return this._levelName;
+  }
+
+  get students(): typeof this._students {
+    return this._students;
   }
 
   set status(value: boolean) {
